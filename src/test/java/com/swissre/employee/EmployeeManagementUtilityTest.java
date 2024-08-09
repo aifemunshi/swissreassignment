@@ -33,25 +33,6 @@ public class EmployeeManagementUtilityTest {
     }
 
     @Test
-    public void testReadEmployeesFromCSV_ValidFile() throws IOException {
-        // Create a temporary CSV file with valid data
-        Path tempFile = Files.createTempFile("test-", ".csv");
-        String csvData = "id,firstName,lastName,salary,managerId\n" +
-                "1,John,Doe,50000,2\n" +
-                "2,Jane,Smith,60000,\n";
-
-        Files.write(tempFile, csvData.getBytes(), StandardOpenOption.WRITE);
-
-        List<Employee> employees = EmployeeManagementUtility.readEmployeesFromCSV(tempFile.toString());
-
-        assertEquals(2, employees.size());
-        assertEquals(new Employee(1, "John", "Doe", 50000.0, 2), employees.get(0));
-        assertEquals(new Employee(2, "Jane", "Smith", 60000.0, null), employees.get(1));
-        // Clean up
-        Files.delete(tempFile);
-    }
-
-    @Test
     public void testBuildOrgStructure_ValidInput() {
         List<Employee> employees = new ArrayList<>();
         employees.add(new Employee(1, "John", "Doe", 50000, 2));

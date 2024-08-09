@@ -2,10 +2,10 @@ package com.swissre.employee.utility;
 
 import com.swissre.employee.model.Employee;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+
+import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -21,16 +21,16 @@ public class EmployeeManagementUtility {
 
     /**
      *
-     * @param filePath
+     * @param resource
      * @return List<Employee>
      * @throws IOException
      */
-    public static List<Employee> readEmployeesFromCSV(String filePath) throws IOException {
+    public static List<Employee> readEmployeesFromCSV(Resource resource) throws IOException {
         List<Employee> employees = new ArrayList<>();
         String line;
         String cvsSplitBy = ",";
 
-        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+        try (InputStream inputStream = resource.getInputStream(); BufferedReader br = new BufferedReader(new InputStreamReader(inputStream))) {
             br.readLine();
             while ((line = br.readLine()) != null) {
                 String[] employeeData = line.split(cvsSplitBy);
