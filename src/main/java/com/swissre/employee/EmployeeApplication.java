@@ -28,7 +28,6 @@ public class EmployeeApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		log.info("Processing of csv file started");
-		//String csvFile = "/Users/aifemunshi/JavaProjects/swissreassignment/src/main/resources/employee.csv";
 		List<Employee> employees = readEmployeesFromCSV(resource);
 		Map<Integer, List<Employee>> orgStructure = buildOrgStructure(employees);
 		performSalaryCalculation(employees, orgStructure);
